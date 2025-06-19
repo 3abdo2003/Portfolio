@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio Testing Checklist</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .device-category { background: #f5f5f5; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .test-item { margin: 8px 0; }
+        .test-item input { margin-right: 8px; }
+        .critical { color: #e74c3c; font-weight: bold; }
+        .important { color: #f39c12; font-weight: bold; }
+        .nice-to-have { color: #27ae60; }
+    </style>
+</head>
+<body>
+    <h1>📱 Portfolio Device Testing Checklist</h1>
+    
+    <div class="device-category">
+        <h2>📱 Mobile Phones (320px - 640px)</h2>
+        <div class="test-item critical">
+            <input type="checkbox"> Navigation hamburger menu opens/closes properly
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> All text is readable without zooming
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> Buttons are easily tappable (44px+ touch targets)
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> Hero section stacks properly (image above text)
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Contact cards stack in single column
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Project cards display in single column
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Skills section stacks properly
+        </div>
+        <div class="test-item nice-to-have">
+            <input type="checkbox"> Smooth scrolling works
+        </div>
+        <div class="test-item nice-to-have">
+            <input type="checkbox"> Hover effects don't interfere with touch
+        </div>
+    </div>
+
+    <div class="device-category">
+        <h2>📋 Tablets (640px - 1024px)</h2>
+        <div class="test-item critical">
+            <input type="checkbox"> Navigation shows desktop version or mobile menu
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> Two-column layouts display properly
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Project cards show 2 per row
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Skills cards show 2 per row
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Contact section maintains good proportions
+        </div>
+        <div class="test-item nice-to-have">
+            <input type="checkbox"> University logo tooltip works
+        </div>
+    </div>
+
+    <div class="device-category">
+        <h2>💻 Laptops/Desktops (1024px+)</h2>
+        <div class="test-item critical">
+            <input type="checkbox"> Full desktop navigation visible
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> Hero section shows side-by-side layout
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Project cards show 2 per row
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Skills cards show 4 per row
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> All hover effects work smoothly
+        </div>
+        <div class="test-item nice-to-have">
+            <input type="checkbox"> Parallax/scroll effects perform well
+        </div>
+    </div>
+
+    <div class="device-category">
+        <h2>🔧 Functional Testing (All Devices)</h2>
+        <div class="test-item critical">
+            <input type="checkbox"> CV download link works
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> Email links open email client
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> Phone links work on mobile
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> GitHub links open correctly
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> LinkedIn link opens correctly
+        </div>
+        <div class="test-item critical">
+            <input type="checkbox"> University logo link works
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Smooth scrolling to sections works
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Active section highlighting works
+        </div>
+    </div>
+
+    <div class="device-category">
+        <h2>⚡ Performance Testing</h2>
+        <div class="test-item critical">
+            <input type="checkbox"> Page loads in under 3 seconds
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> Images load properly
+        </div>
+        <div class="test-item important">
+            <input type="checkbox"> No layout shift during loading
+        </div>
+        <div class="test-item nice-to-have">
+            <input type="checkbox"> Animations are smooth (60fps)
+        </div>
+    </div>
+
+    <h2>🌐 Browser Testing</h2>
+    <div class="device-category">
+        <h3>Mobile Browsers</h3>
+        <div class="test-item"><input type="checkbox"> Safari (iOS)</div>
+        <div class="test-item"><input type="checkbox"> Chrome (Android)</div>
+        <div class="test-item"><input type="checkbox"> Samsung Internet</div>
+        <div class="test-item"><input type="checkbox"> Firefox Mobile</div>
+    </div>
+
+    <div class="device-category">
+        <h3>Desktop Browsers</h3>
+        <div class="test-item"><input type="checkbox"> Chrome</div>
+        <div class="test-item"><input type="checkbox"> Firefox</div>
+        <div class="test-item"><input type="checkbox"> Safari (macOS)</div>
+        <div class="test-item"><input type="checkbox"> Edge</div>
+    </div>
+</body>
+</html>
