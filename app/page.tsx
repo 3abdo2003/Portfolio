@@ -65,7 +65,7 @@ export default function Portfolio() {
   }
 
   const downloadCV = () => {
-    window.open("https://drive.google.com/file/d/106kEcCESWVELODi8-HCde68iZCwqK_n6/view?usp=drive_link", "_blank")
+    window.open("https://drive.google.com/file/d/1tYyCWKXfPoKHta8nkFHbdRR3A34LAijl/view?usp=drive_link", "_blank")
   }
 
   const navItems = [
@@ -174,8 +174,8 @@ export default function Portfolio() {
               </div>
 
               <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed">
-                Computer Science student at German International University Cairo, specializing in Software Engineering.
-                Currently gaining valuable experience as an IT Risk Intern at Banque du Caire, with expertise in
+                Computer Science graduate from the German International University, specializing in Software Engineering and have 
+                experience as an IT Risk Analyst from Banque du Caire, with expertise in
                 <span className="font-semibold text-blue-600"> AI solutions</span>,
                 <span className="font-semibold text-blue-700"> full-stack development</span>, and
                 <span className="font-semibold text-blue-800"> security practices</span>.
@@ -474,7 +474,7 @@ export default function Portfolio() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
-            {/* Colorful Project Cards */}
+            {/* Colorful Project Cards - unified blue palette, StockSight added, Metro removed */}
             {[
               {
                 title: "AI Tool for Architectural Education",
@@ -493,17 +493,33 @@ export default function Portfolio() {
                 subtitle: "Architectural Analysis",
               },
               {
+                title: "StockSight",
+                desc: "Modern inventory management system for organizations to track, analyze, and optimize stock levels with real-time analytics and robust security.",
+                fullDesc:
+                  "Developed a modern inventory management system for organizations to track, analyze, and optimize stock levels. Real-time stock tracking with smart notifications and customizable low-stock alerts. Visual analytics and PDF report generation with interactive charts for actionable insights. Complete audit trail for all inventory changes, supporting accountability and compliance. Multi-role management with secure, role-based access for Admins, Managers, and Staff. Enterprise-grade security with robust authentication, authorization, and audit logging. Built with a scalable React + TypeScript frontend and a RESTful Node.js/Express backend.",
+                tech: ["Node.js", "Express", "MongoDB", "React", "TypeScript", "Vite", "TailwindCSS", "Chart.js", "PDFKit"],
+                badge: "Web App",
+                badgeColor: "bg-blue-600",
+                borderColor: "border-blue-100 hover:border-blue-300",
+                bgColor: "bg-blue-50",
+                iconColor: "from-blue-600 to-blue-700",
+                buttonColor: "hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700",
+                url: "https://github.com/3abdo2003/StockSight",
+                category: "Inventory Management",
+                subtitle: "Stock & Analytics Platform",
+              },
+              {
                 title: "Scalable E-commerce Platform",
                 desc: "Enterprise-grade e-commerce solution built with microservices architecture, featuring real-time event-driven communication and comprehensive payment processing",
                 fullDesc:
                   "Built a comprehensive e-commerce platform using microservices architecture with Kafka for event-driven communication, featuring robust inventory management and secure authentication workflows.",
                 tech: ["NestJS", "Next.js", "Kafka", "Microservices"],
                 badge: "Full-Stack",
-                badgeColor: "bg-blue-700",
-                borderColor: "border-blue-200 hover:border-blue-400",
-                bgColor: "bg-blue-100",
-                iconColor: "from-blue-700 to-blue-800",
-                buttonColor: "hover:border-blue-600 hover:bg-blue-100 hover:text-blue-800",
+                badgeColor: "bg-blue-600",
+                borderColor: "border-blue-100 hover:border-blue-300",
+                bgColor: "bg-blue-50",
+                iconColor: "from-blue-600 to-blue-700",
+                buttonColor: "hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700",
                 url: "https://github.com/3abdo2003/FinalRep",
                 category: "E-commerce Platform",
                 subtitle: "Microservices Architecture",
@@ -515,30 +531,14 @@ export default function Portfolio() {
                   "Complete bookstore solution featuring RESTful APIs, JWT-based authentication, Stripe payment integration, automated email notifications, and comprehensive testing with Jest and Cypress.",
                 tech: ["Node.js", "React", "MongoDB", "Stripe", "Jest", "Cypress"],
                 badge: "Web App",
-                badgeColor: "bg-blue-500",
+                badgeColor: "bg-blue-600",
                 borderColor: "border-blue-100 hover:border-blue-300",
                 bgColor: "bg-blue-50",
-                iconColor: "from-blue-500 to-blue-600",
-                buttonColor: "hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600",
+                iconColor: "from-blue-600 to-blue-700",
+                buttonColor: "hover:border-blue-500 hover:bg-blue-50 hover:text-blue-700",
                 url: "https://github.com/3abdo2003/BookWebsite-Testing",
                 category: "Book Store",
                 subtitle: "Full-Stack Web App",
-              },
-              {
-                title: "Metro System Website",
-                desc: "Dynamic transit management system with intelligent route planning, ticketing functionality, and secure user authentication for seamless user experience",
-                fullDesc:
-                  "Comprehensive metro system platform enabling ticket purchases, dynamic route management, and interactive journey planning with PostgreSQL database integration and secure session management.",
-                tech: ["Node.js", "Express.js", "PostgreSQL", "JavaScript"],
-                badge: "Transportation",
-                badgeColor: "bg-blue-800",
-                borderColor: "border-blue-200 hover:border-blue-400",
-                bgColor: "bg-blue-100",
-                iconColor: "from-blue-800 to-blue-900",
-                buttonColor: "hover:border-blue-700 hover:bg-blue-100 hover:text-blue-800",
-                url: null,
-                category: "Metro System",
-                subtitle: "Transportation Platform",
               },
             ].map((project, index) => (
               <Card
