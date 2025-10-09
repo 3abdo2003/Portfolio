@@ -1,5 +1,7 @@
+
 "use client"
 
+import Head from "next/head"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -32,6 +34,7 @@ export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
+  // Scroll spy
   useEffect(() => {
     const handleScroll = () => {
       const sections = ["hero", "about", "experience", "projects", "skills", "contact"]
@@ -54,6 +57,25 @@ export default function Portfolio() {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  // Scroll animation (reveal on enter, reset on exit so it works both directions)
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-animate]"))
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add("reveal-in")
+          } else {
+            e.target.classList.remove("reveal-in")
+          }
+        }
+      },
+      { root: null, rootMargin: "0px 0px -10% 0px", threshold: 0.15 }
+    )
+    els.forEach((el) => io.observe(el))
+    return () => io.disconnect()
   }, [])
 
   const scrollToSection = (sectionId: string) => {
@@ -79,6 +101,33 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Head>
+        {/* Cabinet Grotesk font */}
+        <link
+          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,600,500,400&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+
+      {/* Global styles for font + scroll reveal animation */}
+      <style jsx global>{`
+        :root {
+          --font-stack: 'Cabinet Grotesk', 'Cabinet Grotesk Variable', system-ui, -apple-system, Segoe UI, Roboto,
+            'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+        }
+        html, body, #__next { font-family: var(--font-stack); }
+        [data-animate] {
+          opacity: 0;
+          transform: translateY(16px);
+          transition: opacity 600ms ease, transform 600ms ease;
+          will-change: opacity, transform;
+        }
+        .reveal-in {
+          opacity: 1;
+          transform: none;
+        }
+      `}</style>
+
       {/* Enhanced Navigation with Subtle Color */}
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -126,7 +175,7 @@ export default function Portfolio() {
 
           {/* Mobile Navigation Menu */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden mt-4 pb-4 border-t border-gray-200">
+            <div className="lg:hidden mt-4 pb-4 border-t border-gray-200" data-animate>
               <div className="flex flex-col space-y-3 pt-4">
                 {navItems.map((item) => (
                   <button
@@ -147,12 +196,12 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      {/* Hero Section with Meaningful Colors */}
+      {/* Hero Section */}
       <section id="hero" className="pt-20 sm:pt-24 lg:pt-32 pb-16 sm:pb-20 lg:pb-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Content Section */}
-            <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+            <div className="space-y-6 lg:space-y-8 order-2 lg:order-1" data-animate>
               <div className="space-y-4 lg:space-y-6">
                 <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 rounded-full px-3 py-2 sm:px-4">
                   <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
@@ -181,8 +230,8 @@ export default function Portfolio() {
                 <span className="font-semibold text-blue-800"> security practices</span>.
               </p>
 
-              {/* Enhanced Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4" data-animate>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
@@ -211,16 +260,16 @@ export default function Portfolio() {
                 </Button>
               </div>
 
-              {/* Enhanced Contact Info Cards with Hover States */}
+              {/* Contact Info Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 pt-4 lg:pt-6">
-                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300">
+                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300" data-animate>
                   <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0" />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs sm:text-sm text-gray-500">Location</p>
                     <p className="font-medium text-gray-900 text-sm sm:text-base">Cairo, Egypt</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300 cursor-pointer group">
+                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300 cursor-pointer group" data-animate>
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs sm:text-sm text-gray-500 group-hover:text-green-600 transition-colors duration-300">
@@ -234,7 +283,7 @@ export default function Portfolio() {
                     </a>
                   </div>
                 </div>
-                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-300 cursor-pointer group sm:col-span-3 lg:col-span-1">
+                <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-300 cursor-pointer group sm:col-span-3 lg:col-span-1" data-animate>
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                   <div className="min-w-0 flex-1">
                     <p className="text-xs sm:text-sm text-gray-500 group-hover:text-purple-600 transition-colors duration-300">
@@ -251,8 +300,8 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Profile Picture with Color Accents */}
-            <div className="relative order-1 lg:order-2">
+            {/* Profile Picture */}
+            <div className="relative order-1 lg:order-2" data-animate>
               <div className="relative w-full h-64 sm:h-80 lg:h-[500px] rounded-2xl lg:rounded-3xl overflow-hidden shadow-xl border border-gray-200 transform hover:scale-105 transition-transform duration-500">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Abdelsamie-lAGWyA6LallY1H1taIALUorrfW9ijf.jpeg"
@@ -272,10 +321,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* About Section with Blue Theme */}
+      {/* About Section */}
       <section id="about" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20" data-animate>
             <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 rounded-full px-3 py-2 sm:px-4 mb-4 sm:mb-6">
               <Award className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
               <span className="text-xs sm:text-sm font-medium text-blue-700">Education & Background</span>
@@ -288,7 +337,7 @@ export default function Portfolio() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-all duration-500 hover:shadow-lg bg-white transform hover:scale-105">
+            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-all duration-500 hover:shadow-lg bg-white transform hover:scale-105" data-animate>
               <CardHeader className="pb-4 sm:pb-6">
                 <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0 flex-shrink-0">
@@ -342,8 +391,8 @@ export default function Portfolio() {
               </CardContent>
             </Card>
 
-            {/* University Logo with Enhanced Hover */}
-            <div className="relative flex items-center justify-center">
+            {/* University Logo */}
+            <div className="relative flex items-center justify-center" data-animate>
               <div className="group relative">
                 <a
                   href="https://giu-uni.de/"
@@ -360,7 +409,7 @@ export default function Portfolio() {
                   />
                 </a>
 
-                {/* Enhanced Tooltip */}
+                {/* Tooltip */}
                 <div className="absolute -bottom-12 sm:-bottom-16 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                   <div className="bg-blue-600 text-white px-3 py-2 sm:px-4 rounded-xl shadow-lg whitespace-nowrap relative">
                     <div className="flex items-center space-x-2">
@@ -376,23 +425,96 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Experience Section with Green Theme */}
+      {/* Experience Section */}
       <section id="experience" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20" data-animate>
             <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 rounded-full px-3 py-2 sm:px-4 mb-4 sm:mb-6">
               <Briefcase className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
               <span className="text-xs sm:text-sm font-medium text-blue-700">Professional Experience</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4 sm:mb-6">Industry Expertise</h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Gaining invaluable real-world experience in IT risk management, security assessments, and regulatory
-              compliance within the dynamic banking sector
-            </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-all duration-500 hover:shadow-lg bg-white transform hover:scale-105">
+          <div className="max-w-4xl mx-auto space-y-8">
+            {/* NEW: Software Developer - Double Shot Digital Marketing (matches blue palette of IT Risk card) */}
+            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-all duration-500 hover:shadow-lg bg-white transform hover:scale-105" data-animate>
+              <CardHeader className="pb-4 sm:pb-6">
+                <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0 flex-shrink-0">
+                    <Code className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
+                  </div>
+                  <div className="flex-1 text-center sm:text-left">
+                    <CardTitle className="text-xl sm:text-2xl mb-2">Software Developer</CardTitle>
+                    <CardDescription className="text-blue-600 font-semibold text-base sm:text-lg mb-2">
+                      Double Shot Digital Marketing, Cairo, Egypt
+                    </CardDescription>
+                    <Badge
+                      variant="secondary"
+                      className="bg-blue-100 text-blue-800 px-3 py-2 sm:px-4 text-xs sm:text-sm font-medium border border-blue-200"
+                    >
+                      Aug 2025 – Present
+                    </Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-blue-50 rounded-xl p-4 sm:p-6">
+                  <h4 className="font-bold text-black mb-4 sm:mb-6 text-base sm:text-lg flex items-center justify-center sm:justify-start">
+                    <Star className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 mr-2" />
+                    Impact & Responsibilities
+                  </h4>
+                  <ul className="space-y-3 sm:space-y-4">
+                    {[
+                      {
+                        title: "Full‑stack Websites",
+                        desc: "Ship custom websites and landing pages across WordPress, Shopify, Framer, and native stacks aligned to clear business outcomes.",
+                      },
+                      {
+                        title: "From Brief to Spec",
+                        desc: "Translate marketing briefs into technical specs, own timelines and deliverables, and keep stakeholders aligned.",
+                      },
+                      {
+                        title: "High‑Performance WP",
+                        desc: "Build bespoke WordPress themes and components optimized for speed, clean design, and long‑term scalability.",
+                      },
+                      {
+                        title: "Infra & Domains",
+                        desc: "Configure DNS, hosting, and domain routing for seamless go‑live and reliable uptime.",
+                      },
+                      {
+                        title: "Speed, Motion, SEO",
+                        desc: "Tune performance, craft tasteful scroll animations, and implement solid on‑page SEO to lift UX and conversions.",
+                      },
+                      {
+                        title: "Cross‑functional Collab",
+                        desc: "Partner with designers and performance marketers to ensure product fit with brand and growth goals.",
+                      },
+                      {
+                        title: "Documentation",
+                        desc: "Document workflows, testing, and release steps to streamline team handover and maintenance.",
+                      },
+                    ].map((item, index) => (
+                      <li
+                        key={index}
+                        className="bg-white rounded-lg p-3 sm:p-4 border border-blue-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300"
+                      >
+                        <div className="flex items-start">
+                          <div className="w-3 h-3 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full mt-1 mr-3 sm:mr-4 flex-shrink-0"></div>
+                          <div>
+                            <h5 className="font-semibold text-black mb-1 text-sm sm:text-base">{item.title}</h5>
+                            <p className="text-gray-600 text-xs sm:text-sm">{item.desc}</p>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Existing: IT Risk Intern (kept palette identical) */}
+            <Card className="border-2 border-blue-100 hover:border-blue-300 transition-all duration-500 hover:shadow-lg bg-white transform hover:scale-105" data-animate>
               <CardHeader className="pb-4 sm:pb-6">
                 <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center shadow-lg mx-auto sm:mx-0 flex-shrink-0">
@@ -458,10 +580,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Projects Section with Purple Theme */}
+      {/* Projects Section */}
       <section id="projects" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20" data-animate>
             <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 rounded-full px-3 py-2 sm:px-4 mb-4 sm:mb-6">
               <Code className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
               <span className="text-xs sm:text-sm font-medium text-blue-700">Featured Projects</span>
@@ -474,7 +596,6 @@ export default function Portfolio() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
-            {/* Colorful Project Cards - unified blue palette, StockSight added, Metro removed */}
             {[
               {
                 title: "AI Tool for Architectural Education",
@@ -544,6 +665,7 @@ export default function Portfolio() {
               <Card
                 key={index}
                 className={`group hover:shadow-lg transition-all duration-500 border-2 ${project.borderColor} overflow-hidden bg-white transform hover:scale-105`}
+                data-animate
               >
                 <div
                   className={`relative h-48 sm:h-56 lg:h-64 overflow-hidden ${project.bgColor} flex items-center justify-center border-b border-gray-200`}
@@ -609,8 +731,8 @@ export default function Portfolio() {
             ))}
           </div>
 
-          {/* Enhanced "And Many More" Section */}
-          <div className="mt-12 sm:mt-16 text-center">
+          {/* Divider */}
+          <div className="mt-12 sm:mt-16 text-center" data-animate>
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
@@ -652,7 +774,7 @@ export default function Portfolio() {
                   { name: "Database Design", color: "text-blue-600 border-blue-300 hover:bg-blue-50" },
                   { name: "UI/UX Projects", color: "text-blue-600 border-blue-300 hover:bg-blue-50" },
                   { name: "Security Tools", color: "text-blue-600 border-blue-300 hover:bg-blue-50" },
-                ].map((category, index) => (
+                ].map((category) => (
                   <Badge
                     key={category.name}
                     variant="outline"
@@ -667,10 +789,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Skills Section with Colorful Icons */}
+      {/* Skills Section */}
       <section id="skills" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20" data-animate>
             <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 rounded-full px-3 py-2 sm:px-4 mb-4 sm:mb-6">
               <Star className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
               <span className="text-xs sm:text-sm font-medium text-blue-700">Technical Expertise</span>
@@ -722,6 +844,7 @@ export default function Portfolio() {
               <Card
                 key={index}
                 className={`text-center hover:shadow-lg transition-all duration-500 border-2 ${category.borderColor} ${category.bgColor} bg-white transform hover:scale-105`}
+                data-animate
               >
                 <CardHeader className="pb-3 sm:pb-4">
                   <div
@@ -750,10 +873,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Contact Section with Enhanced Interactivity */}
+      {/* Contact Section */}
       <section id="contact" className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-12 sm:mb-16" data-animate>
             <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 rounded-full px-3 py-2 sm:px-4 mb-4 sm:mb-6">
               <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" />
               <span className="text-xs sm:text-sm font-medium text-blue-700">Get In Touch</span>
@@ -767,7 +890,7 @@ export default function Portfolio() {
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="space-y-6 sm:space-y-8">
-              <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
+              <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4" data-animate>
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
@@ -829,6 +952,7 @@ export default function Portfolio() {
                         ? `hover:border-${contact.color}-300 hover:bg-${contact.color}-50 hover:shadow-md cursor-pointer transform hover:scale-105`
                         : "hover:shadow-md"
                     }`}
+                    data-animate
                   >
                     <div
                       className={`w-10 h-10 sm:w-12 sm:h-12 bg-${contact.color}-100 rounded-xl flex items-center justify-center flex-shrink-0 ${
@@ -879,7 +1003,7 @@ export default function Portfolio() {
               </div>
             </div>
 
-            <div className="relative order-first lg:order-last">
+            <div className="relative order-first lg:order-last" data-animate>
               <div className="relative w-full h-64 sm:h-80 lg:h-96 rounded-2xl lg:rounded-3xl overflow-hidden shadow-lg border-2 border-gray-200 hover:border-blue-300 transform hover:scale-105 transition-all duration-500">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Contact%20illustration-f3RyCbkxP14Xop1A0ko64v2byzeFnD.png"
@@ -893,11 +1017,11 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Footer with Color Accents */}
+      {/* Footer */}
       <footer className="bg-gradient-to-r from-gray-900 to-black text-white py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-8 sm:mb-12">
-            <div className="sm:col-span-2 text-center sm:text-left">
+            <div className="sm:col-span-2 text-center sm:text-left" data-animate>
               <div className="flex items-center justify-center sm:justify-start space-x-3 mb-4 sm:mb-6">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl flex items-center justify-center">
                   <Code className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -909,7 +1033,7 @@ export default function Portfolio() {
                 security practices, and creating meaningful impact through technology.
               </p>
             </div>
-            <div className="text-center sm:text-left">
+            <div className="text-center sm:text-left" data-animate>
               <h4 className="font-bold mb-4 sm:mb-6 text-base sm:text-lg text-white">Quick Links</h4>
               <div className="space-y-2 sm:space-y-3">
                 {["About", "Experience", "Projects", "Skills", "Contact"].map((link) => (
@@ -923,7 +1047,7 @@ export default function Portfolio() {
                 ))}
               </div>
             </div>
-            <div className="text-center sm:text-left">
+            <div className="text-center sm:text-left" data-animate>
               <h4 className="font-bold mb-4 sm:mb-6 text-base sm:text-lg text-white">Connect</h4>
               <div className="flex justify-center sm:justify-start space-x-3 sm:space-x-4">
                 {[
@@ -948,7 +1072,7 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-6 sm:pt-8 text-center">
+          <div className="border-t border-gray-800 pt-6 sm:pt-8 text-center" data-animate>
             <p className="text-gray-400 text-sm sm:text-base">
               © 2025 Abdelsamie Elazazy. Crafted with passion using Next.js and Tailwind CSS.
             </p>
