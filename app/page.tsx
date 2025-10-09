@@ -87,7 +87,7 @@ export default function Portfolio() {
   }
 
   const downloadCV = () => {
-    window.open("https://drive.google.com/file/d/1tYyCWKXfPoKHta8nkFHbdRR3A34LAijl/view?usp=drive_link", "_blank")
+    window.open("https://drive.google.com/file/d/1nvJJgVrdZ8mTWRW-fdIGj-Byjs4kmaZI/view?usp=sharing", "_blank")
   }
 
   const navItems = [
