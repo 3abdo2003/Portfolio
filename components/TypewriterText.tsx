@@ -35,9 +35,9 @@ export const TypewriterText = ({ texts }: { texts: string[] }) => {
   }, [])
 
   return (
-    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 font-bold min-h-[1.5em] inline-block whitespace-nowrap">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400 font-bold whitespace-nowrap">
       {texts[index].substring(0, subIndex)}
-      <span className={`${blink ? "opacity-100" : "opacity-0"} text-blue-600 transition-opacity ml-0.5`}>|</span>
+      <span className={`${blink ? "opacity-100" : "opacity-0"} text-red-600 transition-opacity ml-0.5`}>|</span>
     </span>
   )
 }

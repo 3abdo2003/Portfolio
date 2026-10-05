@@ -43,7 +43,7 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
           className={`
             w-full max-w-4xl rounded-full transition-all duration-300
             ${navScrollY > 20 
-              ? "bg-white/70 backdrop-blur-2xl border border-white/40 shadow-xl shadow-blue-500/10 py-3 px-6" 
+              ? "bg-white/70 backdrop-blur-2xl border border-white/40 shadow-xl shadow-red-500/10 py-3 px-6" 
               : "bg-white/40 backdrop-blur-md border border-white/30 shadow-lg py-3 px-6"
             }
           `}
@@ -54,7 +54,7 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
               className="flex items-center cursor-pointer group"
               onClick={() => handleNavClick("hero")}
             >
-              <span className="font-bold text-slate-800 text-lg tracking-tight group-hover:text-blue-600 transition-colors">
+              <span className="font-bold text-slate-800 text-lg tracking-tight group-hover:text-red-600 transition-colors">
                 Abdelsamie Elazazy
               </span>
             </div>
@@ -67,8 +67,8 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
                   onClick={() => handleNavClick(item.id)}
                   className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
                     activeSection === item.id
-                      ? "text-blue-700"
-                      : "text-slate-600 hover:text-blue-600"
+                      ? "text-red-700"
+                      : "text-slate-600 hover:text-red-600"
                   }`}
                 >
                   {activeSection === item.id && (
@@ -99,7 +99,7 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
                    whileHover={{ y: -2 }}
                    href="http://www.linkedin.com/in/abdelsamie-elazazy-439917210" 
                    target="_blank" 
-                   className="text-slate-500 hover:text-blue-600 transition-colors"
+                   className="text-slate-500 hover:text-red-600 transition-colors"
                  >
                    <Linkedin className="w-5 h-5" />
                  </motion.a>
@@ -107,7 +107,7 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
 
               <Button
                 onClick={() => handleNavClick("contact")}
-                className="hidden md:inline-flex rounded-full bg-slate-900 hover:bg-blue-600 text-white px-6 shadow-lg hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105"
+                className="hidden md:inline-flex rounded-full bg-slate-900 hover:bg-red-600 text-white px-6 shadow-lg hover:shadow-red-500/25 transition-all duration-300 transform hover:scale-105"
               >
                 Let's Talk
               </Button>
@@ -142,13 +142,13 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
                     onClick={() => handleNavClick(item.id)}
                     className={`flex items-center justify-between px-5 py-4 rounded-2xl transition-all font-medium text-lg ${
                       activeSection === item.id
-                        ? "bg-blue-50 text-blue-600 shadow-sm"
+                        ? "bg-red-50 text-red-600 shadow-sm"
                         : "text-slate-600 hover:bg-slate-50"
                     }`}
                   >
                     {item.label}
                     {activeSection === item.id && (
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-red-600" />
                     )}
                   </button>
                 ))}
@@ -162,7 +162,7 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
                     <Github className="w-5 h-5 mr-2" /> GitHub
                   </Button>
                    <Button 
-                    className="w-full justify-center bg-blue-600 hover:bg-blue-700 rounded-xl py-6 shadow-blue-200 shadow-lg"
+                    className="w-full justify-center bg-red-600 hover:bg-red-700 rounded-xl py-6 shadow-red-100 shadow-lg"
                     onClick={() => handleNavClick("contact")}
                   >
                     <Mail className="w-5 h-5 mr-2" /> Hire Me

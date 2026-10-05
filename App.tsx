@@ -71,11 +71,11 @@ export default function Portfolio() {
   }
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen bg-white overflow-x-hidden selection:bg-red-100 selection:text-red-900">
       
       {/* Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 origin-left z-[60]"
+        className="fixed top-0 left-0 right-0 h-1 bg-red-600 origin-left z-[60]"
         style={{ scaleX }}
       />
 

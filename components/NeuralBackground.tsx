@@ -49,7 +49,7 @@ export const NeuralBackground = ({ scrollY }: { scrollY: MotionValue<number> }) 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       
       // Draw Particles and Connections
-      ctx.fillStyle = "rgba(37, 99, 235, 0.5)" // Blue
+      ctx.fillStyle = "rgba(220, 38, 38, 0.5)" // Red-600
       ctx.lineWidth = 0.5
 
       particles.forEach((p, i) => {
@@ -75,7 +75,7 @@ export const NeuralBackground = ({ scrollY }: { scrollY: MotionValue<number> }) 
 
           if (distance < 120) {
             ctx.beginPath()
-            ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 * (1 - distance / 120)})`
+            ctx.strokeStyle = `rgba(220, 38, 38, ${0.15 * (1 - distance / 120)})`
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(p2.x, p2.y)
             ctx.stroke()
@@ -119,7 +119,7 @@ export const NeuralBackground = ({ scrollY }: { scrollY: MotionValue<number> }) 
             y: mousePos.y * 0.02,
            }}
            transition={{ type: "spring", damping: 100, stiffness: 50 }}
-           className="w-full h-full bg-blue-500/10 rounded-full blur-[120px]"
+           className="w-full h-full bg-red-500/10 rounded-full blur-[120px]"
         />
       </motion.div>
       
@@ -133,7 +133,7 @@ export const NeuralBackground = ({ scrollY }: { scrollY: MotionValue<number> }) 
             y: mousePos.y * -0.02,
           }}
           transition={{ type: "spring", damping: 100, stiffness: 50 }}
-          className="w-full h-full bg-blue-400/10 rounded-full blur-[120px]"
+          className="w-full h-full bg-red-400/10 rounded-full blur-[120px]"
         />
       </motion.div>
     </div>

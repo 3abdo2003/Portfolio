@@ -9,22 +9,22 @@ export const Contact = () => {
       <div className="max-w-5xl mx-auto px-6">
         <motion.div 
           whileHover={{ scale: 1.01 }}
-          className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-[2.5rem] p-8 sm:p-16 text-center text-white shadow-2xl relative overflow-hidden"
+          className="bg-gradient-to-br from-red-600 to-red-800 rounded-[2.5rem] p-8 sm:p-16 text-center text-white shadow-2xl relative overflow-hidden"
         >
           {/* Background Texture */}
           <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
           
           <div className="relative z-10">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">Ready to Innovate?</h2>
-            <p className="text-blue-100 text-lg sm:text-xl max-w-2xl mx-auto mb-10">
-              I'm currently pushing the boundaries of Medical AI. Whether you need deep learning expertise or robust software architecture, let's connect.
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">Let's Connect</h2>
+            <p className="text-red-100 text-lg sm:text-xl max-w-2xl mx-auto mb-10">
+              I'm always open to discussing new opportunities, project coordination, or innovative tech solutions. Reach out and let's build something great.
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
               <Button 
                 size="lg" 
                 onClick={() => window.open("mailto:abdulsamea2003@gmail.com")}
-                className="bg-white text-blue-600 hover:bg-slate-100 h-14 px-8 rounded-full text-lg font-bold shadow-lg w-full sm:w-auto"
+                className="bg-white text-red-600 hover:bg-slate-100 h-14 px-8 rounded-full text-lg font-bold shadow-lg w-full sm:w-auto"
               >
                 <Mail className="mr-2 w-5 h-5" />
                 Send me an Email

@@ -12,9 +12,9 @@ export const Footer = ({ scrollToSection }: FooterProps) => {
           <span className="font-bold text-slate-900">© 2025 Abdelsamie Elazazy.</span>
         </div>
         <div className="flex gap-6 text-sm font-medium text-slate-600">
-          <button onClick={() => scrollToSection("about")} className="hover:text-blue-600 transition-colors">About</button>
-          <button onClick={() => scrollToSection("projects")} className="hover:text-blue-600 transition-colors">Projects</button>
-          <button onClick={() => scrollToSection("contact")} className="hover:text-blue-600 transition-colors">Contact</button>
+          <button onClick={() => scrollToSection("about")} className="hover:text-red-600 transition-colors">About</button>
+          <button onClick={() => scrollToSection("projects")} className="hover:text-red-600 transition-colors">Projects</button>
+          <button onClick={() => scrollToSection("contact")} className="hover:text-red-600 transition-colors">Contact</button>
         </div>
       </div>
     </footer>
