@@ -59,7 +59,7 @@ export const Hero = ({ scrollY, scrollToSection }: HeroProps) => {
               <Button 
                 variant="outline" 
                 size="lg"
-                onClick={() => window.open("https://drive.google.com/file/d/1nvJJgVrdZ8mTWRW-fdIGj-Byjs4kmaZI/view?usp=sharing", "_blank")}
+                onClick={() => window.open("https://drive.google.com/file/d/1hbW_XfK-ZPWccwIuIpWYQL1cI5vNoiWe/view?usp=sharing", "_blank")}
                 className="border-2 border-slate-200 text-slate-700 hover:border-red-600 hover:text-red-600 rounded-full h-12 px-8 bg-transparent transition-all w-full sm:w-auto"
               >
                 <Download className="mr-2 w-4 h-4" />
