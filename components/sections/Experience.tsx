@@ -6,11 +6,11 @@ import { SectionHeading } from "../SectionHeading"
 import { ExperienceSkeleton } from "../Skeletons"
 
 interface ExperienceProps {
-  isLoading: boolean
+  isLoading?: boolean
   scrollY: MotionValue<number>
 }
 
-export const Experience = ({ isLoading, scrollY }: ExperienceProps) => {
+export const Experience = ({ isLoading = false, scrollY }: ExperienceProps) => {
   const yExperienceGrid = useTransform(scrollY, [0, 2000], [0, 200])
 
   return (

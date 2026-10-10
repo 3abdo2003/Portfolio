@@ -1,0 +1,146 @@
+/* =============================================================
+   CRITICAL CSS — loaded before React, provides instant UI shell
+   ============================================================= */
+
+/* Skeleton pulse animation — pure CSS, no JS needed */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.skeleton-pulse {
+  animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Inline loading shell — visible before React mounts */
+.loading-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.loading-shell .shell-nav {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 56rem;
+  height: 3.5rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  z-index: 50;
+}
+
+.loading-shell .shell-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  flex: 1;
+  max-width: 80rem;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.loading-shell .shell-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .loading-shell .shell-hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+}
+
+.loading-shell .shell-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  order: 2;
+}
+
+@media (min-width: 1024px) {
+  .loading-shell .shell-text-col {
+    order: 1;
+  }
+}
+
+.loading-shell .shell-image-col {
+  display: flex;
+  justify-content: center;
+  order: 1;
+}
+
+@media (min-width: 1024px) {
+  .loading-shell .shell-image-col {
+    order: 2;
+  }
+}
+
+.shell-block {
+  background: #f1f5f9;
+  border-radius: 0.75rem;
+}
+
+.shell-block.skeleton-pulse {
+  background: #e2e8f0;
+}
+
+/* Performance: contain paint for heavy sections */
+.perf-contain {
+  contain: content;
+}
+
+/* GPU-accelerated transforms for framer-motion elements */
+.gpu-layer {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .skeleton-pulse {
+    animation: none !important;
+    opacity: 0.5;
+  }
+}
+
+/* Image loading optimization */
+img {
+  content-visibility: auto;
+}
+
+/* Lazy sections: use content-visibility for below-the-fold */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Hide the loading shell once React has mounted */
+#root:not(:empty) + .loading-shell,
+#root:not(:empty) ~ .loading-shell {
+  display: none;
+}

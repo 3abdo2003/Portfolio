@@ -6,8 +6,25 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Abdelsamie Elazazy | Customer Delivery PC</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- PERFORMANCE: Preconnect to external origins FIRST -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://aistudiocdn.com" crossorigin />
+  <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" crossorigin />
+
+  <!-- PERFORMANCE: Preload hero image so it's ready when React renders -->
+  <link rel="preload" as="image" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Abdelsamie-lAGWyA6LallY1H1taIALUorrfW9ijf.jpeg" />
+
+  <!-- PERFORMANCE: Load critical CSS before anything else -->
+  <link rel="stylesheet" href="/index.css" />
+
+  <!-- PERFORMANCE: Load font with display=swap to avoid FOIT (Flash of Invisible Text) -->
   <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,600,500,400&display=swap" rel="stylesheet" />
+
+  <!-- PERFORMANCE: Load Tailwind CDN with async to not block rendering -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
   <style>
     :root {
       --font-stack: 'Cabinet Grotesk', 'Cabinet Grotesk Variable', system-ui, -apple-system, Segoe UI, Roboto,
@@ -81,11 +98,58 @@
   }
 }
 </script>
-  <link rel="stylesheet" href="/index.css">
 </head>
 
 <body>
   <div id="root"></div>
+
+  <!-- PERFORMANCE: Instant skeleton shell — visible BEFORE React loads -->
+  <!-- This disappears automatically once React mounts into #root -->
+  <div class="loading-shell" id="loading-shell" aria-hidden="true">
+    <!-- Skeleton Navbar -->
+    <div class="shell-nav"></div>
+
+    <!-- Skeleton Hero -->
+    <div class="shell-hero">
+      <div class="shell-hero-grid">
+        <!-- Text column -->
+        <div class="shell-text-col">
+          <div class="shell-block skeleton-pulse" style="width: 60%; height: 1rem; border-radius: 9999px;"></div>
+          <div class="shell-block skeleton-pulse" style="width: 90%; height: 3rem;"></div>
+          <div class="shell-block skeleton-pulse" style="width: 70%; height: 2rem;"></div>
+          <div class="shell-block skeleton-pulse" style="width: 100%; height: 1.25rem; max-width: 28rem;"></div>
+          <div class="shell-block skeleton-pulse" style="width: 85%; height: 1.25rem; max-width: 24rem;"></div>
+          <div style="display: flex; gap: 1rem; padding-top: 0.5rem;">
+            <div class="shell-block skeleton-pulse" style="width: 10rem; height: 3rem; border-radius: 9999px;"></div>
+            <div class="shell-block skeleton-pulse" style="width: 10rem; height: 3rem; border-radius: 9999px; background: transparent; border: 2px solid #e2e8f0;"></div>
+          </div>
+        </div>
+        <!-- Image column -->
+        <div class="shell-image-col">
+          <div class="shell-block skeleton-pulse" style="width: 18rem; height: 18rem; border-radius: 2rem;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE: Inline script to hide skeleton as soon as React renders -->
+  <script>
+    // Use MutationObserver for instant skeleton removal
+    (function() {
+      var root = document.getElementById('root');
+      var shell = document.getElementById('loading-shell');
+      if (!root || !shell) return;
+      
+      var observer = new MutationObserver(function() {
+        if (root.children.length > 0) {
+          shell.style.display = 'none';
+          observer.disconnect();
+        }
+      });
+      observer.observe(root, { childList: true });
+    })();
+  </script>
+
   <script type="module" src="/index.tsx"></script>
 </body>
 

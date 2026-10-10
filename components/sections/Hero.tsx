@@ -88,6 +88,10 @@ export const Hero = ({ scrollY, scrollToSection }: HeroProps) => {
                 <img 
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Abdelsamie-lAGWyA6LallY1H1taIALUorrfW9ijf.jpeg" 
                   alt="Abdelsamie Elazazy"
+                  fetchPriority="high"
+                  decoding="async"
+                  width="450"
+                  height="450"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>

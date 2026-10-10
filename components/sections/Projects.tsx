@@ -7,10 +7,10 @@ import { ProjectSkeleton } from "../Skeletons"
 import { BookStoreIcon } from "../BookStoreIcon"
 
 interface ProjectsProps {
-  isLoading: boolean
+  isLoading?: boolean
 }
 
-export const Projects = ({ isLoading }: ProjectsProps) => {
+export const Projects = ({ isLoading = false }: ProjectsProps) => {
   return (
     <section id="projects" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
