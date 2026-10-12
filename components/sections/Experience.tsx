@@ -64,7 +64,7 @@ export const Experience = ({ isLoading = false, scrollY }: ExperienceProps) => {
                       <h3 className="text-lg sm:text-2xl font-bold text-slate-900 leading-tight">Customer Delivery Project Coordinator</h3>
                       <p className="text-red-600 font-medium text-sm sm:text-base">VOIS (Discover Program)</p>
                     </div>
-                    <Badge className="bg-red-50 text-red-700 hover:bg-red-100 w-fit border border-red-200 text-[10px] sm:text-sm whitespace-nowrap px-2 py-0.5 sm:px-2.5 sm:py-0.5">Nov 2025 – Present</Badge>
+                    <Badge className="bg-red-50 text-red-700 hover:bg-red-100 w-fit border border-red-200 text-[10px] sm:text-sm whitespace-nowrap px-2 py-0.5 sm:px-2.5 sm:py-0.5">April 2025 – Present</Badge>
                   </div>
                   <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                      {[
