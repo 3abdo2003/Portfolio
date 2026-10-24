@@ -9,6 +9,7 @@ import { Hero } from "./components/sections/Hero"
 const About = lazy(() => import("./components/sections/About").then(m => ({ default: m.About })))
 const Experience = lazy(() => import("./components/sections/Experience").then(m => ({ default: m.Experience })))
 const Projects = lazy(() => import("./components/sections/Projects").then(m => ({ default: m.Projects })))
+const Freelance = lazy(() => import("./components/sections/Freelance").then(m => ({ default: m.Freelance })))
 const Skills = lazy(() => import("./components/sections/Skills").then(m => ({ default: m.Skills })))
 const Contact = lazy(() => import("./components/sections/Contact").then(m => ({ default: m.Contact })))
 const Footer = lazy(() => import("./components/sections/Footer").then(m => ({ default: m.Footer })))
@@ -46,36 +47,69 @@ export default function Portfolio() {
     restDelta: 0.001
   })
 
-  // PERFORMANCE: Use requestAnimationFrame-throttled scroll handler instead of firing on every pixel
+  // Reliable active-section tracking
   useEffect(() => {
+    const sections = [
+      "hero",
+      "about",
+      "experience",
+      "projects",
+      "freelance",
+      "skills",
+      "contact",
+    ]
+
     let ticking = false
+
+    const updateActiveSection = () => {
+      const activationPoint = 150
+      const pageBottom =
+        window.scrollY + window.innerHeight >=
+        document.documentElement.scrollHeight - 10
+
+      if (pageBottom) {
+        setActiveSection("contact")
+        ticking = false
+        return
+      }
+
+      let currentSection = sections[0]
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId)
+
+        if (!element) continue
+
+        const top = element.getBoundingClientRect().top
+
+        if (top <= activationPoint) {
+          currentSection = sectionId
+        } else {
+          break
+        }
+      }
+
+      setActiveSection(currentSection)
+      ticking = false
+    }
 
     const handleScroll = () => {
       if (ticking) return
+
       ticking = true
-
-      requestAnimationFrame(() => {
-        const sections = ["hero", "about", "experience", "projects", "skills", "contact"]
-        const scrollPosition = window.scrollY + 100
-
-        for (const section of sections) {
-          const element = document.getElementById(section)
-          if (element) {
-            const offsetTop = element.offsetTop
-            const offsetHeight = element.offsetHeight
-
-            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-              setActiveSection(section)
-              break
-            }
-          }
-        }
-        ticking = false
-      })
+      window.requestAnimationFrame(updateActiveSection)
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("resize", handleScroll)
+
+    // Set the correct section on initial load and refresh
+    updateActiveSection()
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", handleScroll)
+    }
   }, [])
 
   const scrollToSection = useCallback((sectionId: string) => {
@@ -121,6 +155,12 @@ export default function Portfolio() {
       <Suspense fallback={<SectionFallback />}>
         <div className="lazy-section">
           <Projects />
+        </div>
+      </Suspense>
+
+      <Suspense fallback={<SectionFallback />}>
+        <div className="lazy-section">
+          <Freelance />
         </div>
       </Suspense>
       

@@ -30,6 +30,7 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
     { id: "about", label: "About" },
     { id: "experience", label: "Experience" },
     { id: "projects", label: "Work" },
+    { id: "freelance", label: "Freelance" },
     { id: "skills", label: "Skills" },
   ]
 
@@ -60,7 +61,7 @@ export const Navbar = ({ activeSection, scrollToSection }: NavbarProps) => {
             </div>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center space-x-1">
+            <div className="hidden md:flex items-center space-x-0">
               {navItems.map((item) => (
                 <button
                   key={item.id}
